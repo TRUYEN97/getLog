@@ -279,6 +279,7 @@ public abstract class AbsIQ extends AbsMode {
     @Override
     protected void end() {
         this.excell.end();
+        this.formats.clear();
     }
 
     protected abstract boolean titleMath(String line, String title);
