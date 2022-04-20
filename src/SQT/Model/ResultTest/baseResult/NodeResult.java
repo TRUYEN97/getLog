@@ -31,7 +31,7 @@ public class NodeResult {
     }
 
     public String getTitleNameExcell() {
-        if (item.isBlank()) {
+        if (item == null || item.isBlank()) {
             return title;
         }
         return String.format("%s | %s", title, item);

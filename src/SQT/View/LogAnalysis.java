@@ -155,7 +155,7 @@ public class LogAnalysis extends javax.swing.JFrame {
         btStopScan = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Log analysis 2.1.3");
+        setTitle("Log analysis 2.2.0");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {

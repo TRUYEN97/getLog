@@ -70,6 +70,7 @@ public class Service implements IContain {
     public boolean containAll(String string, Iterator<String> itrtr) {
         return this.contain.containAll(string, itrtr);
     }
+
     @Override
     public boolean isNumeric(String value) {
         return contain.isNumeric(value);
@@ -77,6 +78,18 @@ public class Service implements IContain {
 
     public IContain getContain() {
         return contain;
+    }
+
+    public boolean isContainOneOf(List<List<String>> listKeys, String line) {
+        if (listKeys.isEmpty()) {
+            return true;
+        }
+        for (List<String> keys : listKeys) {
+            if (compareContain(line, keys)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean compareContain(String str, List<String> contain) {
@@ -222,7 +235,7 @@ public class Service implements IContain {
             return null;
         }
     }
-    
+
     public String subStringLastIndex(String data, String rg1, String rg2) {
         if (data == null) {
             return null;
@@ -315,7 +328,5 @@ public class Service implements IContain {
         newKeys.addAll(Arrays.asList(data.split(":")));
         return newKeys;
     }
-
-    
 
 }

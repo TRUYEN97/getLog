@@ -260,7 +260,7 @@ public abstract class AbsIQ extends AbsMode {
     }
 
     private boolean isTrueTitle(String line) {
-        return rowAnalysis.isContainOneOf(wareHouse.getTittleKey(),
+        return service.isContainOneOf(wareHouse.getTittleKey(),
                 rowAnalysis.getTitle(line));
     }
 

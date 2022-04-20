@@ -19,7 +19,7 @@ public class IQData extends AbsIQ {
 
     @Override
     protected boolean isItemOK(String line) {
-        return isItemTest(line) && rowAnalysis.isContainOneOf(wareHouse.getItemKey(), getItem(line));
+        return isItemTest(line) && service.isContainOneOf(wareHouse.getItemKey(), getItem(line));
     }
 
     @Override
