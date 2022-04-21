@@ -13,8 +13,10 @@ import SQT.View.LogAnalysis;
  */
 public class IQData extends AbsIQ {
 
+    private final RowAnalysis rowAnalysis;
     public IQData(String name, LogAnalysis ui) {
         super(name, ui);
+        this.rowAnalysis = new RowAnalysis();
     }
 
     @Override
@@ -78,6 +80,16 @@ public class IQData extends AbsIQ {
     private String getUnit(String line) {
         String data = rowAnalysis.subAndTrim(line, ":", null);
         return rowAnalysis.getUnit(data);
+    }
+
+    @Override
+    protected String getTitle(String line) {
+        return rowAnalysis.getTitle(line);
+    }
+
+    @Override
+    protected boolean isTitle(String line) {
+        return rowAnalysis.isTitle(line);
     }
 
 }

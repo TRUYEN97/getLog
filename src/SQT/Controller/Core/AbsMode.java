@@ -10,8 +10,7 @@ import SQT.Model.ResultTest.Excell;
 import SQT.Model.ServiceClass.Service;
 import SQT.Model.WareHouse;
 import SQT.View.LogAnalysis;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import SQT.View.RunFrame;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -33,9 +32,7 @@ public abstract class AbsMode implements IMode {
     protected final Excell excell;
     private final LogAnalysis ui;
     private final List<File> files;
-    private final Timer timer;
-    private int index = 0;
-    private int success = 0;
+    private final RunFrame runFrame;
     private boolean stop;
 
     protected AbsMode(String name, LogAnalysis _ui) {
@@ -47,36 +44,7 @@ public abstract class AbsMode implements IMode {
         stop = false;
         this.excell = new Excell(_ui);
         this.files = new ArrayList<>();
-        this.timer = new Timer(500, new ActionListener() {
-            private LogAnalysis ui;
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                this.ui.setValueProcessBar(index, success);
-            }
-
-            public ActionListener setUi(LogAnalysis ui) {
-                this.ui = ui;
-                return this;
-            }
-        }.setUi(this.ui)) {
-            @Override
-            public void start() {
-                super.start();
-                files.clear();
-                files.addAll(wareHouse.getAllFile());
-                ui.initProcessBar(files.size() - 1);
-                ui.setValueProcessBar(0, 0);
-            }
-
-            @Override
-            public void stop() {
-                super.stop();
-                ui.setValueProcessBar(index, success);
-                ui.endProcessBar();
-            }
-
-        };
+        this.runFrame = new RunFrame(this);
     }
 
     public void stopScan() {
@@ -94,7 +62,8 @@ public abstract class AbsMode implements IMode {
     public void run() {
         try {
             long begin = System.currentTimeMillis();
-            this.timer.start();
+            this.files.addAll(wareHouse.getAllFile());
+            this.runFrame.run(this.files.size());
             this.stop = false;
             if (!init()) {
                 return;
@@ -103,24 +72,22 @@ public abstract class AbsMode implements IMode {
             for (File file : this.files) {
                 input = this.ioFile.getBufferedReader(file);
                 if (input != null && dataAnalysis(input, file.getPath())) {
-                    this.success += 1;
+                    this.runFrame.success();
                     try {
                         input.close();
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
                 }
-                this.index++;
                 if (this.stop) {
                     break;
                 }
+                this.runFrame.nextIndex();
             }
-            System.out.println(System.currentTimeMillis() - begin);
-            end();
         } finally {
-            this.timer.stop();
-            this.success = 0;
-            this.index = 0;
+            this.runFrame.stop();
+            this.files.clear();
+            end();
         }
 
     }

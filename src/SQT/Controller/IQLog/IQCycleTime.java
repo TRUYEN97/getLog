@@ -4,8 +4,11 @@
  */
 package SQT.Controller.IQLog;
 
+import SQT.Model.ResultTest.Sheet.Proxy.UnitProxy;
+import SQT.Model.ResultTest.Sheet.Proxy.UpLowUnitProxy;
 import SQT.Model.ResultTest.baseResult.NodeResult;
 import SQT.View.LogAnalysis;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -13,18 +16,33 @@ import SQT.View.LogAnalysis;
  */
 public class IQCycleTime extends AbsIQ {
 
+    private final RowAnalysis rowAnalysis;
+
     public IQCycleTime(String name, LogAnalysis _ui) {
         super(name, _ui);
+        this.rowAnalysis = new RowAnalysis();
     }
 
     @Override
+    protected boolean init() {
+        if (wareHouse.getItemKey().isEmpty() && wareHouse.getTittleKey().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Key word is empty!!");
+            return false;
+        }
+        this.excell.start(new UnitProxy());
+        this.formats.clear();
+        return true;
+    }
+    
+
+    @Override
     protected boolean isItemOK(String line) {
-        return isTestTime(line) || isCycleTime(line);
+        return isTestTime(line) || isFlowFuncTime(line) || isTestFuncTime(line);
     }
 
     @Override
     protected boolean isRow(String line) {
-        return rowAnalysis.isTitle(line) || isItemOK(line);
+        return rowAnalysis.isTitle(line) || isItemOK(line) || isTitleCycleTime(line);
     }
 
     @Override
@@ -48,20 +66,23 @@ public class IQCycleTime extends AbsIQ {
         return line.startsWith("Test Time =");
     }
 
-    private boolean isCycleTime(String line) {
+    private boolean isTestFuncTime(String line) {
         return line.startsWith("    Test Function Time            :");
     }
 
     @Override
     protected String getItem(String line) {
-        if (isCycleTime(line)) {
-            return "Cycle time";
+        if (isTestFuncTime(line)) {
+            return "Test Function Time";
+        }
+        if (isFlowFuncTime(line)) {
+            return "Flow Run Time";
         }
         return "";
     }
 
     private String getValue(String line) {
-        if (isCycleTime(line)) {
+        if (isFlowFuncTime(line) || isTestFuncTime(line)) {
             String data = rowAnalysis.subAndTrim(line, ":", null);
             return rowAnalysis.getValue(data);
         }
@@ -70,12 +91,33 @@ public class IQCycleTime extends AbsIQ {
     }
 
     private String getUnit(String line) {
-        if (isCycleTime(line)) {
+        if (isFlowFuncTime(line) || isTestFuncTime(line)) {
             String data = rowAnalysis.subAndTrim(line, ":", null);
             return rowAnalysis.getUnit(data);
         }
         String data = rowAnalysis.subAndTrim(line, "=", null);
         return rowAnalysis.getUnit(data);
+    }
+
+    private boolean isTitleCycleTime(String line) {
+        return line.startsWith("In This Run:");
+    }
+
+    private boolean isFlowFuncTime(String line) {
+        return line.startsWith("    Flow Run Time                 :");
+    }
+
+    @Override
+    protected String getTitle(String line) {
+        if (isTitleCycleTime(line)) {
+            return "Cycle time";
+        }
+        return rowAnalysis.getTitle(line);
+    }
+
+    @Override
+    protected boolean isTitle(String line) {
+        return rowAnalysis.isTitle(line) || isTitleCycleTime(line);
     }
 
 }

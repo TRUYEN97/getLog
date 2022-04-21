@@ -44,7 +44,6 @@ public class JsonData extends AbsMode {
             excell.addRow(resultTest);
             return true;
         } catch (JSONException e) {
-            e.printStackTrace();
             return false;
         }
     }

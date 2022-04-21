@@ -19,6 +19,7 @@ public class MyChooser {
     private File[] files;
     private File file;
     private File currDir;
+    private File newFile;
 
     public MyChooser() {
         this.currDir = FileSystemView.getFileSystemView().getHomeDirectory();
@@ -101,6 +102,14 @@ public class MyChooser {
             this.file = myChooser.getSelectedFile();
         }
         return result;
+    }
+
+    public File getNewFile() {
+        return newFile;
+    }
+
+    public void setNewFile(File newFile) {
+        this.newFile = newFile;
     }
 
 }

@@ -144,18 +144,15 @@ public class LogAnalysis extends javax.swing.JFrame {
         TreeFolder = new javax.swing.JTree();
         jPanel7 = new javax.swing.JPanel();
         btBrowserSave = new javax.swing.JButton();
-        txtNameSave = new javax.swing.JTextField();
         btOpen = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
-        Processer = new javax.swing.JProgressBar();
-        lbProcess = new javax.swing.JLabel();
         cbbMode = new javax.swing.JComboBox<>();
         btRun = new javax.swing.JButton();
         cbbExcellType = new javax.swing.JComboBox<>();
         btStopScan = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Log analysis 2.2.0");
+        setTitle("Log analysis 2.3.0");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
@@ -402,7 +399,7 @@ public class LogAnalysis extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
+                        .addComponent(jScrollPane3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -428,12 +425,6 @@ public class LogAnalysis extends javax.swing.JFrame {
             }
         });
 
-        txtNameSave.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtNameSaveKeyPressed(evt);
-            }
-        });
-
         btOpen.setText("Open");
         btOpen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -446,29 +437,22 @@ public class LogAnalysis extends javax.swing.JFrame {
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(txtNameSave)
-                .addGap(13, 13, 13)
-                .addComponent(btOpen, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btBrowserSave, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(13, 13, 13))
+                .addGap(119, 119, 119)
+                .addComponent(btOpen, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btBrowserSave, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(101, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btBrowserSave)
-                    .addComponent(txtNameSave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btOpen))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Run", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
-
-        lbProcess.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lbProcess.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbProcess.setText("0/0");
 
         cbbMode.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         cbbMode.setModel(new javax.swing.DefaultComboBoxModel<>(this.getListMode()));
@@ -513,37 +497,24 @@ public class LogAnalysis extends javax.swing.JFrame {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Processer, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
-                    .addComponent(lbProcess, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(cbbMode, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbbExcellType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cbbExcellType, 0, 103, Short.MAX_VALUE)
+                    .addComponent(btStopScan, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
                     .addComponent(btRun, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cbbMode, 0, 100, Short.MAX_VALUE)
-                    .addComponent(btStopScan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(12, 12, 12))
+                .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lbProcess))
-                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(cbbMode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cbbExcellType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(Processer, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btRun)
-                            .addComponent(btStopScan)))))
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btRun)
+                    .addComponent(cbbMode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btStopScan)
+                    .addComponent(cbbExcellType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -668,7 +639,7 @@ public class LogAnalysis extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (this.chooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
             File file = this.chooser.getSelectedFile();
-            this.txtNameSave.setText(file.toString());
+            this.chooser.setNewFile(file);
             boolean success = this.service.copyFileNotRename(
                     new File(this.wareHouse.getPathExcellTemp()), file);
             if (!success) {
@@ -727,20 +698,13 @@ public class LogAnalysis extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtPathLogKeyPressed
 
-    private void txtNameSaveKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNameSaveKeyPressed
-        // TODO add your handling code here:
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            String dir = this.txtNameSave.getText().trim();
-            File foder = new File(dir);
-            service.openFile(foder);
-        }
-    }//GEN-LAST:event_txtNameSaveKeyPressed
-
     private void btOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btOpenActionPerformed
         // TODO add your handling code here:
-        if (this.chooser.showOpenFile(this, this.txtNameSave.getText()) == JFileChooser.APPROVE_OPTION) {
+        File file = this.chooser.getNewFile();
+        if (this.chooser.showOpenFile(this,
+                file == null ? "" : file.getPath()) == JFileChooser.APPROVE_OPTION) {
             service.openFile(this.chooser.getSelectedFile());
-            this.txtNameSave.setText(this.chooser.getSelectedFile().getPath());
+            this.chooser.setNewFile(this.chooser.getSelectedFile());
         }
     }//GEN-LAST:event_btOpenActionPerformed
 
@@ -828,7 +792,6 @@ public class LogAnalysis extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JProgressBar Processer;
     private javax.swing.JTree TreeFolder;
     private javax.swing.JButton btBrowser;
     private javax.swing.JButton btBrowserSave;
@@ -855,13 +818,11 @@ public class LogAnalysis extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JLabel lbListSun;
-    private javax.swing.JLabel lbProcess;
     private javax.swing.JLabel lbSun;
     private javax.swing.JTable tbListFile;
     private javax.swing.JTextField txtContain;
     private javax.swing.JTextArea txtItem;
     private javax.swing.JTextField txtMatch;
-    private javax.swing.JTextField txtNameSave;
     private javax.swing.JTextField txtPathLog;
     private javax.swing.JTextArea txtTitle;
     // End of variables declaration//GEN-END:variables
@@ -881,21 +842,6 @@ public class LogAnalysis extends javax.swing.JFrame {
 
     public String getDataItem() {
         return this.txtItem.getText();
-    }
-
-    public void initProcessBar(int size) {
-        this.Processer.setStringPainted(true);
-        this.Processer.setMaximum(size);
-        this.Processer.setMinimum(0);
-    }
-
-    public void setValueProcessBar(int index, int success) {
-        this.Processer.setValue(index);
-        this.lbProcess.setText(String.format("%s / %s", success, index));
-    }
-
-    public void endProcessBar() {
-        this.Processer.setStringPainted(false);
     }
 
     public JTextField getTxtContain() {
