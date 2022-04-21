@@ -27,15 +27,13 @@ public abstract class AbsIQ extends AbsMode {
     private static final int SUCCESS = -1;
     private static final int OUT_SISE = 0;
     private static final int NOT_TRUE = 1;
-    private final LogFormat formats;
+    protected final LogFormat formats;
     private final List<String> log;
-    protected final RowAnalysis rowAnalysis;
     private boolean isLogPass;
 
     protected AbsIQ(String name, LogAnalysis ui) {
         super(name, ui);
         this.formats = new LogFormat();
-        this.rowAnalysis = new RowAnalysis();
         this.log = new ArrayList<>();
         this.isLogPass = false;
     }
@@ -53,22 +51,26 @@ public abstract class AbsIQ extends AbsMode {
             return core(nameFile);
         } finally {
             this.log.clear();
+            this.isLogPass = false;
         }
     }
 
     private boolean getLog(BufferedReader input) {
         try {
             String line;
-            this.log.clear();
             if (isHasTrueTitle(input)) {
                 while ((line = input.readLine()) != null) {
                     if (isRow(line)) {
+                        if (isTitle(line)) {
+                            this.log.add(END_TITLE);
+                        }
                         this.log.add(line);
                     }
                     if (!this.isLogPass && line.contains(" *  P A S S  *")) {
                         this.isLogPass = true;
                     }
                 }
+                this.log.add(END_TITLE);
                 return true;
             }
             return false;
@@ -82,12 +84,14 @@ public abstract class AbsIQ extends AbsMode {
         String line;
         while ((line = input.readLine()) != null) {
             if (isTitle(line) && isTrueTitle(line)) {
+                this.log.add(END_TITLE);
                 this.log.add(line);
                 return true;
             }
         }
         return false;
     }
+    private static final String END_TITLE = "^------------------------------------;";
 
     private boolean core(String nameFile) {
         try {
@@ -151,11 +155,8 @@ public abstract class AbsIQ extends AbsMode {
         for (int index = 0; index < log.size(); index++) {
             String line = log.get(index);
             if (isTitle(line)) {
-                if (newTitleNode != null && newTitleNode.isNotEmpty()) {
-                    newFormat.addNewNode(newTitleNode);
-                }
                 if (isTrueTitle(line)) {
-                    String title = rowAnalysis.getTitle(line);
+                    String title = getTitle(line);
                     newTitleNode = new TitleNode(title);
                     newTitleNode.setTitleIndex(index);
                     resultTest.setCurrTitle(title);
@@ -167,6 +168,8 @@ public abstract class AbsIQ extends AbsMode {
                 nodeResult = new NodeResult(resultTest.getCurrTitle());
                 setValueToNodeResult(nodeResult, line);
                 resultTest.add(nodeResult);
+            } else if (isEndTitle(line) && newTitleNode != null && newTitleNode.isNotEmpty()) {
+                newFormat.addNewNode(newTitleNode);
             }
         }
         if (newFormat.isNotEmpty()) {
@@ -183,7 +186,7 @@ public abstract class AbsIQ extends AbsMode {
         for (String line : this.log) {
             if (isTitle(line)) {
                 if (isTrueTitle(line)) {
-                    resultTest.setCurrTitle(rowAnalysis.getTitle(line));
+                    resultTest.setCurrTitle(getTitle(line));
                 } else {
                     resultTest.setCurrTitle(null);
                 }
@@ -255,13 +258,10 @@ public abstract class AbsIQ extends AbsMode {
         }
         return OUT_SISE;
     }
-    private boolean isTitle(String line) {
-        return rowAnalysis.isTitle(line);
-    }
 
     private boolean isTrueTitle(String line) {
-        return rowAnalysis.isContainOneOf(wareHouse.getTittleKey(),
-                rowAnalysis.getTitle(line));
+        return service.isContainOneOf(wareHouse.getTittleKey(),
+                getTitle(line));
     }
 
     @Override
@@ -279,6 +279,7 @@ public abstract class AbsIQ extends AbsMode {
     @Override
     protected void end() {
         this.excell.end();
+        this.formats.clear();
     }
 
     protected abstract boolean titleMath(String line, String title);
@@ -288,5 +289,13 @@ public abstract class AbsIQ extends AbsMode {
     protected abstract boolean isTrueItem(String line, String item);
 
     protected abstract String getItem(String line);
+
+    protected abstract String getTitle(String line);
+
+    protected abstract boolean isTitle(String line);
+
+    private boolean isEndTitle(String line) {
+        return line.equals(END_TITLE);
+    }
 
 }

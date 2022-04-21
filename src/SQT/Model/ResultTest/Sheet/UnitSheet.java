@@ -25,7 +25,7 @@ public class UnitSheet extends AbsSheet {
         this.titles.add(titleName);
         int colIndex = this.titles.indexOf(titleName);
         setValue(title.getTitleNameExcell(), createCell(0, colIndex));
-        setValue(title.getUnit(), createCell(3, colIndex));
+        setValue(title.getUnit(), createCell(1, colIndex));
     }
 
 }

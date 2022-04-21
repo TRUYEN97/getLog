@@ -13,13 +13,15 @@ import SQT.View.LogAnalysis;
  */
 public class IQData extends AbsIQ {
 
+    private final RowAnalysis rowAnalysis;
     public IQData(String name, LogAnalysis ui) {
         super(name, ui);
+        this.rowAnalysis = new RowAnalysis();
     }
 
     @Override
     protected boolean isItemOK(String line) {
-        return isItemTest(line) && rowAnalysis.isContainOneOf(wareHouse.getItemKey(), getItem(line));
+        return isItemTest(line) && service.isContainOneOf(wareHouse.getItemKey(), getItem(line));
     }
 
     @Override
@@ -78,6 +80,16 @@ public class IQData extends AbsIQ {
     private String getUnit(String line) {
         String data = rowAnalysis.subAndTrim(line, ":", null);
         return rowAnalysis.getUnit(data);
+    }
+
+    @Override
+    protected String getTitle(String line) {
+        return rowAnalysis.getTitle(line);
+    }
+
+    @Override
+    protected boolean isTitle(String line) {
+        return rowAnalysis.isTitle(line);
     }
 
 }

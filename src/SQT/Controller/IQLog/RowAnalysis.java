@@ -48,18 +48,6 @@ class RowAnalysis {
         return result.trim();
     }
 
-    public boolean isContainOneOf(List<List<String>> listKeys, String line) {
-        if (listKeys.isEmpty()) {
-            return true;
-        }
-        for (List<String> keys : listKeys) {
-            if (service.compareContain(line, keys)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     public String getUnit(String str) {
         if (hasUnit(str)) {
             return service.containElement(str, unit);

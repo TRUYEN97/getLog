@@ -164,7 +164,6 @@ public class TableService {
         if (getSelectedRowsCount() > 0) {
             if (chooser.showSelectFolder(ui) == JFileChooser.APPROVE_OPTION) {
                 copyFrame frameCopy = new copyFrame();
-                frameCopy.setVisible(true);
                 frameCopy.run(getSelectedRows(), chooser.getSelectedFile().getPath());
             }
         }

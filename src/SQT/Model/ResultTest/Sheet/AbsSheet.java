@@ -31,6 +31,7 @@ public abstract class AbsSheet implements Cloneable {
     protected Contain contain;
     private final XSSFWorkbook workbook;
     private final List<String> DateFormat;
+    private final CellStyle cellStyleDate;
 
     protected AbsSheet(XSSFWorkbook workbook, String nameSheet) {
         this.workbook = workbook;
@@ -38,6 +39,8 @@ public abstract class AbsSheet implements Cloneable {
         this.titles = new ArrayList<>();
         this.contain = new Contain();
         this.titles.add(TITLE);
+        this.cellStyleDate = this.workbook.createCellStyle();
+        this.cellStyleDate.setDataFormat((short) 14);
         if (workbook.getSheet(nameSheet) == null) {
             this.sheet = workbook.createSheet(nameSheet);
         } else {
@@ -82,7 +85,7 @@ public abstract class AbsSheet implements Cloneable {
             if (isNewTitleName(titleName)) {
                 createNewTitle(title);
             }
-            setValue(title.getValue(), 
+            setValue(title.getValue(),
                     createCell(rowNum, titles.indexOf(titleName)));
         } catch (Exception e) {
             e.printStackTrace();
@@ -104,20 +107,22 @@ public abstract class AbsSheet implements Cloneable {
                 } else {
                     cell.setCellValue(Long.parseLong(title));
                 }
-            } else if (isDateTime(title)) {
-                Date date;
-                date = getDateTime(title);
-                if (date == null) {
-                    cell.setCellValue("");
-                } else {
-                    CellStyle cellStyle = this.workbook.createCellStyle();
-                    cellStyle.setDataFormat((short) 14);
-                    cell.setCellStyle(cellStyle);
-                    cell.setCellValue(date);
-                }
+//            } else if (isDateTime(title)) {
+//                addDateFormat(title, cell);
             } else {
                 cell.setCellValue(title);
             }
+        }
+    }
+
+    private void addDateFormat(String title, Cell cell) {
+        Date date;
+        date = getDateTime(title);
+        if (date == null) {
+            cell.setCellValue("");
+        } else {
+            cell.setCellStyle(cellStyleDate);
+            cell.setCellValue(date);
         }
     }
 
