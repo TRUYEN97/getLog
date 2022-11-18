@@ -75,7 +75,7 @@ public class JsonDataSpeed extends AbsMode {
             if (elem instanceof JSObject) {
                 JSONObject itemTest = ((JSONObject) elem);
                 String nameItem = itemTest.getString(TEST_NAME);
-                if (nameItem == null || titles.contains(nameItem)) {
+                if (nameItem == null || !titles.contains(nameItem)) {
                     continue;
                 }
                 getAllValueOfTest(itemTest);
