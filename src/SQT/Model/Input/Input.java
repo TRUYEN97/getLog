@@ -40,7 +40,7 @@ public class Input {
         if (title == null) {
             return false;
         }
-        return this.itemLine.add(title) && this.item.add(this.service.slipKeyWord(title));
+        return this.titleLine.add(title) && this.title.add(this.service.slipKeyWord(title));
     }
 
     public boolean addItem(String itemLine) {

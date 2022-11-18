@@ -108,7 +108,7 @@ public abstract class AbsMode implements IMode {
         if (data == null || data.isEmpty()) {
             return false;
         }
-        for (String line : data.split(";")) {
+        for (String line : data.trim().split(";")) {
             if (line.isEmpty()) {
                 continue;
             }
@@ -123,7 +123,7 @@ public abstract class AbsMode implements IMode {
         if (data == null || data.isEmpty()) {
             return false;
         }
-        for (String line : data.split(";")) {
+        for (String line : data.trim().split(";")) {
             if (line.isEmpty()) {
                 continue;
             }

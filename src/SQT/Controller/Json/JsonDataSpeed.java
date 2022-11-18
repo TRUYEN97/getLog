@@ -75,7 +75,7 @@ public class JsonDataSpeed extends AbsMode {
             if (elem instanceof JSObject) {
                 JSONObject itemTest = ((JSONObject) elem);
                 String nameItem = itemTest.getString(TEST_NAME);
-                if (nameItem == null || titles.contains(nameItem.trim())) {
+                if (nameItem == null || titles.contains(nameItem)) {
                     continue;
                 }
                 getAllValueOfTest(itemTest);
@@ -86,11 +86,10 @@ public class JsonDataSpeed extends AbsMode {
     private void getAllValueOfTest(JSONObject itemTest) throws JSONException {
         String nameItem = itemTest.getString(TEST_NAME);
         for (String itemKey : inputKey.getLineTittleKey()) {
-            if (itemKey == null || itemKey.isEmpty() || !itemTest.has(itemKey)) {
+            if (itemKey == null || !itemTest.has(itemKey)) {
                 continue;
             }
             getValue(nameItem, itemKey, itemTest.getString(itemKey));
-            
         }
     }
 

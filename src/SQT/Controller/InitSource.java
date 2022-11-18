@@ -6,6 +6,7 @@ package SQT.Controller;
 
 import SQT.Model.ServiceClass.Service;
 import SQT.View.LogAnalysis;
+import java.io.File;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -21,18 +22,24 @@ public class InitSource {
     private static final String CONTAIN = "contain";
     private static final String MATCH = "match";
     private static final String DIR_SHOOSER = "dir";
-    private static final String DIR_TREE_FOLDER= "dirTree";
+    private static final String DIR_TREE_FOLDER = "dirTree";
     private final Service service;
-    private final JSONObject keyJson;
+    private JSONObject keyJson;
 
     public InitSource() {
         this.service = new Service();
-        String strSuorce = service.readFile(DIR_KEY_WORDS);
-        if (strSuorce == null || strSuorce.isEmpty()) {
+        if (!new File(DIR_KEY_WORDS).exists()) {
+            new File(DIR_KEY_WORDS).getParentFile().mkdirs();
             keyJson = new JSONObject();
         } else {
-            keyJson = new JSONObject(strSuorce);
+            try {
+                String strSuorce = service.readFile(DIR_KEY_WORDS);
+                keyJson = new JSONObject(strSuorce);
+            } catch (JSONException e) {
+                keyJson = new JSONObject();
+            }
         }
+
     }
 
     public void saveKeyWords() {
@@ -49,7 +56,7 @@ public class InitSource {
     public void setDir(String value) {
         keyJson.put(DIR_SHOOSER, value);
     }
-    
+
     public void setDirTre(String value) {
         keyJson.put(DIR_TREE_FOLDER, value);
     }
@@ -69,11 +76,11 @@ public class InitSource {
     public void setMacth(String value) {
         keyJson.put(MATCH, value);
     }
-    
+
     public String getDir() {
         return getValue(keyJson, DIR_SHOOSER, "..");
     }
-    
+
     public String getDirTree() {
         return getValue(keyJson, DIR_TREE_FOLDER, "..");
     }

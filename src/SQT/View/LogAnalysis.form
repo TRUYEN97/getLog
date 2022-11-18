@@ -3,7 +3,7 @@
 <Form version="1.7" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
-    <Property name="title" type="java.lang.String" value="Log analysis 2.4.0"/>
+    <Property name="title" type="java.lang.String" value="Log analysis 2.4.2"/>
     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
       <Color id="Default Cursor"/>
     </Property>
@@ -306,8 +306,8 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jScrollPane4" pref="0" max="32767" attributes="0"/>
                               <Group type="102" attributes="0">
-                                  <Component id="jScrollPane3" max="32767" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jScrollPane3" min="-2" pref="191" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
                                   <Component id="jPanel11" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -440,8 +440,8 @@
                                       <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace min="-2" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="txtContain" pref="195" max="32767" attributes="0"/>
-                                              <Component id="txtMatch" max="32767" attributes="0"/>
+                                              <Component id="txtContain" min="-2" pref="195" max="-2" attributes="0"/>
+                                              <Component id="txtMatch" min="-2" pref="195" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -499,7 +499,7 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lbListSun" alignment="0" max="32767" attributes="0"/>
+                              <Component id="lbListSun" alignment="0" min="-2" pref="207" max="-2" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
@@ -567,11 +567,11 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="119" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                           <Component id="btOpen" min="-2" pref="101" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="btBrowserSave" min="-2" pref="103" max="-2" attributes="0"/>
-                          <EmptySpace pref="101" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>

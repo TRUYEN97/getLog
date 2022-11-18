@@ -43,23 +43,22 @@ public class IOFile {
         }
         return null;
     }
-    
+
     public FileOutputStream getFileOutStream(String dir) {
         File file = new File(dir);
-        new File(file.getParent()).mkdirs();
+        file.getParentFile().mkdirs();
         try {
             return new FileOutputStream(file);
         } catch (FileNotFoundException ex) {
-           ex.printStackTrace();
+            ex.printStackTrace();
             JOptionPane.showMessageDialog(null, ex.toString());
         }
         return null;
     }
-    
 
     public FileWriter getFileWriter(String dir) {
         File file = new File(dir);
-        new File(file.getParent()).mkdirs();
+        file.getParentFile().mkdirs();
         try {
             return new FileWriter(file);
         } catch (IOException ex) {
@@ -84,7 +83,7 @@ public class IOFile {
         }
         return new BufferedReader(new InputStreamReader(input));
     }
-    
+
     public BufferedWriter getBufferedWriter(String dir) {
         FileWriter outPut = getFileWriter(dir);
         if (outPut == null) {
@@ -92,7 +91,5 @@ public class IOFile {
         }
         return new BufferedWriter(outPut);
     }
-    
-    
 
 }
