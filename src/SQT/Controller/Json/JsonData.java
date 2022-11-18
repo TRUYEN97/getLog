@@ -6,8 +6,6 @@ package SQT.Controller.Json;
 
 import SQT.Controller.Core.AbsMode;
 import SQT.Model.ResultTest.Sheet.Proxy.SimpleProxy;
-import SQT.Model.ResultTest.Sheet.Proxy.UnitProxy;
-import SQT.Model.ResultTest.Sheet.Proxy.UpLowUnitProxy;
 import SQT.Model.ResultTest.baseResult.NodeResult;
 import SQT.Model.ResultTest.baseResult.ResultTest;
 import SQT.View.LogAnalysis;
@@ -51,7 +49,7 @@ public class JsonData extends AbsMode {
     private void checkItemTest() throws JSONException {
         for (Object elem : dataJson.getJSONArray(KEY_TESTS)) {
             JSONObject itemTest = ((JSONObject) elem);
-            if (service.isContainOneOf(wareHouse.getTittleKey(), itemTest.getString(TEST_NAME))) {
+            if (service.isContainOneOf(inputKey.getTittleKey(), itemTest.getString(TEST_NAME))) {
                 getAllValueOfTest(itemTest);
             }
         }
@@ -61,7 +59,7 @@ public class JsonData extends AbsMode {
         String nameItem = itemTest.getString(TEST_NAME);
         for (String itemKey : itemTest.keySet()) {
             if (!itemKey.equals(TEST_NAME)) {
-                if (service.isContainOneOf(wareHouse.getItemKey(), itemKey)) {
+                if (service.isContainOneOf(inputKey.getItemKey(), itemKey)) {
                     getValue(nameItem, itemKey, itemTest.getString(itemKey));
                 }
             }
@@ -79,7 +77,7 @@ public class JsonData extends AbsMode {
 
     @Override
     protected boolean init() {
-        if (wareHouse.getItemKey().isEmpty() && wareHouse.getTittleKey().isEmpty()) {
+        if (inputKey.getItemKey().isEmpty() && inputKey.getTittleKey().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Key word is empty!!");
             return false;
         }

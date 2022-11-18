@@ -260,13 +260,13 @@ public abstract class AbsIQ extends AbsMode {
     }
 
     private boolean isTrueTitle(String line) {
-        return service.isContainOneOf(wareHouse.getTittleKey(),
+        return service.isContainOneOf(inputKey.getTittleKey(),
                 getTitle(line));
     }
 
     @Override
     protected boolean init() {
-        if (wareHouse.getItemKey().isEmpty() && wareHouse.getTittleKey().isEmpty()) {
+        if (inputKey.getItemKey().isEmpty() && inputKey.getTittleKey().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Key word is empty!!");
             return false;
         }

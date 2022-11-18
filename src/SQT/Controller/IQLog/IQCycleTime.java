@@ -25,7 +25,7 @@ public class IQCycleTime extends AbsIQ {
 
     @Override
     protected boolean init() {
-        if (wareHouse.getItemKey().isEmpty() && wareHouse.getTittleKey().isEmpty()) {
+        if (inputKey.getItemKey().isEmpty() && inputKey.getTittleKey().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Key word is empty!!");
             return false;
         }

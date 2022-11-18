@@ -6,6 +6,7 @@ package SQT.Controller;
 
 import SQT.Model.MyNodeTree;
 import SQT.View.LogAnalysis;
+import java.awt.Cursor;
 import java.io.File;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultTreeModel;
@@ -21,10 +22,12 @@ public final class FolderScan {
     private final JTree treeFolder;
     private DefaultTreeModel modeTree;
     private boolean stopScan;
+    private final LogAnalysis ui;
 
     public FolderScan(LogAnalysis ui) {
         this.treeFolder = ui.getTree();
         this.modeTree = (DefaultTreeModel) this.treeFolder.getModel();
+        this.ui = ui;
         reset();
     }
 
@@ -37,6 +40,9 @@ public final class FolderScan {
 
             @Override
             public void run() {
+                if (ui.getCursor().getType() != Cursor.WAIT_CURSOR) {
+                    ui.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+                }
                 MyNodeTree<File> nodeTree;
                 reset();
                 if (folders.length == 1) {
@@ -54,6 +60,7 @@ public final class FolderScan {
                 modeTree = new DefaultTreeModel(nodeTree);
                 treeFolder.setModel(modeTree);
                 modeTree.reload();
+                ui.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
             }
 
             private Thread setFolders(File[] folders) {
@@ -69,11 +76,15 @@ public final class FolderScan {
     }
 
     public void insertFolder(MyNodeTree<File> node) {
+        if (ui.getCursor().getType() != Cursor.WAIT_CURSOR) {
+            ui.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+        }
         if (node.getValue().listFiles().length <= 0 || (node.getChildCount() > 0
                 && ((MyNodeTree<File>) node.getFirstChild()).getValue() != null)) {
             return;
         }
         reloadNode(node);
+        ui.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }
 
     private void reloadNode(MyNodeTree<File> node) {
@@ -105,6 +116,9 @@ public final class FolderScan {
 
     public void deleteFolder() {
         if (this.treeFolder.getSelectionCount() > 0) {
+            if (ui.getCursor().getType() != Cursor.WAIT_CURSOR) {
+                ui.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+            }
             DefaultTreeModel model = (DefaultTreeModel) this.treeFolder.getModel();
             TreePath[] treePath = this.treeFolder.getSelectionPaths();
             for (TreePath treePath1 : treePath) {
@@ -129,7 +143,9 @@ public final class FolderScan {
 
     public void refesh() {
         if (this.treeFolder.getSelectionCount() > 0) {
-            DefaultTreeModel model = (DefaultTreeModel) this.treeFolder.getModel();
+            if (ui.getCursor().getType() != Cursor.WAIT_CURSOR) {
+                ui.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+            }
             TreePath[] treePath = this.treeFolder.getSelectionPaths();
             for (TreePath treePath1 : treePath) {
                 MyNodeTree selectedNode = (MyNodeTree) treePath1.getLastPathComponent();
@@ -137,6 +153,7 @@ public final class FolderScan {
                     reloadNode(selectedNode);
                 }
             }
+            ui.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         }
     }
 }

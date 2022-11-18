@@ -4,6 +4,7 @@
  */
 package SQT.Model.ResultTest.baseResult;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
  *
  * @author 21AK22
  */
-public class ResultTest implements Iterator<NodeResult> {
+public class ResultTest implements Iterator<NodeResult>, Serializable {
 
     private final List<NodeResult> results;
     private final String dirFile;

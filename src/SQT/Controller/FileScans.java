@@ -8,6 +8,7 @@ import SQT.Model.MyFileFilter;
 import SQT.Model.MyNodeTree;
 import SQT.Model.WareHouse;
 import SQT.View.LogAnalysis;
+import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -57,6 +58,7 @@ public class FileScans {
         this.scanFile = new Thread() {
             @Override
             public void run() {
+                ui.setCursor(new Cursor(Cursor.WAIT_CURSOR));
                 MyFileFilter filter = new MyFileFilter();
                 filter.setContain(ui.getTxtContain().getText());
                 filter.setMatch(ui.getTxtMatch().getText());
@@ -66,6 +68,7 @@ public class FileScans {
                 MyNodeTree<File> root = (MyNodeTree<File>) ui.getTree().getModel().getRoot();
                 visitAllNodes(root, filter);
                 ui.getTableService().addAll(wareHouse.getAllFile());
+                ui.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
             }
 
         };

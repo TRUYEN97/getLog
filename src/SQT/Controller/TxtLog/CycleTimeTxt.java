@@ -50,7 +50,7 @@ public class CycleTimeTxt extends AbsMode {
         boolean itemOk = false;
         try {
             while ((line = input.readLine()) != null) {
-                if (isTitleFormat(line) && isTitleKeyword(line, wareHouse.getTittleKey())) {
+                if (isTitleFormat(line) && isTitleKeyword(line, this.inputKey.getTittleKey())) {
                     resultTest.setCurrTitle(getTitleName(line));
                     itemOk = true;
                 } else if (itemOk && isCycleTime(line)) {
