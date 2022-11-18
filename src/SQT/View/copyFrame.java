@@ -17,6 +17,7 @@ public class copyFrame extends javax.swing.JFrame {
     private final WareHouse wareHouse;
     private final Service service;
     private Thread thread;
+    private boolean stop;
 
     /**
      * Creates new form copyFrame
@@ -25,6 +26,7 @@ public class copyFrame extends javax.swing.JFrame {
         initComponents();
         this.wareHouse = WareHouse.getInstance();
         this.service = new Service();
+        this.stop = false;
     }
 
     public void run(int[] rows, String folder) {
@@ -49,6 +51,7 @@ public class copyFrame extends javax.swing.JFrame {
         this.processCopy.setMaximum(rows.length);
         this.processCopy.setMinimum(0);
         this.processCopy.setStringPainted(true);
+        this.stop = false;
         this.thread = new Thread() {
             private int[] rows;
             private String folder;
@@ -57,6 +60,9 @@ public class copyFrame extends javax.swing.JFrame {
             public void run() {
                 int value = 1;
                 for (Integer index : rows) {
+                    if (stop) {
+                        break;
+                    }
                     File source = wareHouse.getFileAt(index);
                     File newFile = new File(String.format("%s%s%s",
                             folder,
@@ -138,7 +144,7 @@ public class copyFrame extends javax.swing.JFrame {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
         if (this.thread != null && this.thread.isAlive()) {
-            this.thread.stop();
+            stop = true;
         }
     }//GEN-LAST:event_formWindowClosing
 

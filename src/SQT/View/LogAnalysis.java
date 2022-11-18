@@ -12,6 +12,7 @@ import SQT.Controller.IQLog.IQCycleTime;
 import SQT.Controller.IQLog.IQData;
 import SQT.Controller.InitSource;
 import SQT.Controller.Json.JsonData;
+import SQT.Controller.Json.JsonDataSpeed;
 import SQT.Controller.TxtLog.CycleTimeTxt;
 import SQT.Model.MyNodeTree;
 import SQT.Model.ResultTest.Sheet.AbsSheetType;
@@ -81,7 +82,8 @@ public class LogAnalysis extends javax.swing.JFrame {
     private void initListMode() {
         this.listMode = new ArrayList<>();
         this.listMode.add(new IQData("IQ Log", this));
-        this.listMode.add(new JsonData("json Log", this));
+        this.listMode.add(new JsonData("json log", this));
+        this.listMode.add(new JsonDataSpeed("json speed", this));
         this.listMode.add(new IQCycleTime("IQ cycle time", this));
         this.listMode.add(new CycleTimeTxt("logTxt cycle time", this));
     }
@@ -152,7 +154,7 @@ public class LogAnalysis extends javax.swing.JFrame {
         btStopScan = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Log analysis 2.3.0");
+        setTitle("Log analysis 2.4.0");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
