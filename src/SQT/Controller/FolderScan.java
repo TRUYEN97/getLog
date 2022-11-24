@@ -128,6 +128,7 @@ public final class FolderScan {
                     model.reload(selectedNode.getParent());
                 }
             }
+            ui.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         }
     }
 

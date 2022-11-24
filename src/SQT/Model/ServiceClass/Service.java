@@ -137,14 +137,11 @@ public class Service implements IContain {
     public List<String> findStringGroups(String data, String regex) {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(data);
-        if (matcher.groupCount() > 0) {
-            List<String> result = new ArrayList<>();
-            while (matcher.find()) {
-                result.add(matcher.group());
-            }
-            return result;
+        List<String> result = new ArrayList<>();
+        while (matcher.find()) {
+            result.add(matcher.group());
         }
-        return null;
+        return result;
     }
 
     public void copyFile(File suorce, File newFile) {

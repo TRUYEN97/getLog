@@ -13,6 +13,7 @@ import SQT.Controller.IQLog.IQData;
 import SQT.Controller.InitSource;
 import SQT.Controller.Json.JsonData;
 import SQT.Controller.Json.JsonDataSpeed;
+import SQT.Controller.Json.JsonSpeed;
 import SQT.Controller.TxtLog.CycleTimeTxt;
 import SQT.Model.MyNodeTree;
 import SQT.Model.ResultTest.Sheet.AbsSheetType;
@@ -83,7 +84,8 @@ public class LogAnalysis extends javax.swing.JFrame {
         this.listMode = new ArrayList<>();
         this.listMode.add(new IQData("IQ Log", this));
         this.listMode.add(new JsonData("json log", this));
-        this.listMode.add(new JsonDataSpeed("json speed", this));
+        this.listMode.add(new JsonSpeed("json speed", this));
+//        this.listMode.add(new JsonDataSpeed("json speed1", this));
         this.listMode.add(new IQCycleTime("IQ cycle time", this));
         this.listMode.add(new CycleTimeTxt("logTxt cycle time", this));
     }

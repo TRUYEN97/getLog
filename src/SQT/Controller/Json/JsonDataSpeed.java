@@ -72,7 +72,7 @@ public class JsonDataSpeed extends AbsMode {
     private void checkItemTest() throws JSONException {
         Set<String> titles = inputKey.getLineItemKey();
         for (Object elem : dataJson.getJSONArray(KEY_TESTS)) {
-            if (elem instanceof JSObject) {
+            if (elem instanceof JSONObject) {
                 JSONObject itemTest = ((JSONObject) elem);
                 String nameItem = itemTest.getString(TEST_NAME);
                 if (nameItem == null || !titles.contains(nameItem)) {
