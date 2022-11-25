@@ -57,11 +57,9 @@ public class JsonData extends AbsMode {
 
     private void getAllValueOfTest(JSONObject itemTest) throws JSONException {
         String nameItem = itemTest.getString(TEST_NAME);
-        for (String itemKey : itemTest.keySet()) {
-            if (!itemKey.equals(TEST_NAME)) {
-                if (service.isContainOneOf(inputKey.getItemKey(), itemKey)) {
-                    getValue(nameItem, itemKey, itemTest.getString(itemKey));
-                }
+        for (String itemKey : inputKey.getLineItemKey()) {
+            if (itemTest.has(itemKey)) {
+                getValue(nameItem, itemKey, itemTest.getString(itemKey));
             }
         }
     }
