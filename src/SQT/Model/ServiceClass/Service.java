@@ -181,8 +181,8 @@ public class Service implements IContain {
     private String createNewName(File file) {
         String nameFile = file.getName();
         if (nameFile.contains(".")) {
-            String originName = subString(nameFile, null, ".").trim();
-            String duoi = subString(nameFile, ".", null);
+            String originName = subStringLastIndex(nameFile, null, ".").trim();
+            String duoi = subStringLastIndex(nameFile, ".", null);
             return String.format("%s%s%s.%s",
                     file.getParent(),
                     File.separator,
@@ -200,7 +200,7 @@ public class Service implements IContain {
         if (nameFile.matches(".+_\\(-?[0-9]+\\)$")
                 && (str = subString(nameFile, "(", ")")) != null
                 && (originName = subString(nameFile, null, "_(")) != null) {
-            Integer numble = Integer.valueOf(str) + 1;
+            Integer numble = Integer.parseInt(str) + 1;
             return String.format("%s_(%s)", originName, numble);
         }
         return String.format("%s_(1)", nameFile);
